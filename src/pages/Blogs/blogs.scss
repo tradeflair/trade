@@ -1,0 +1,23 @@
+.a_blogs_container {
+  margin-top: 10rem;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .a_blogs_content {
+    margin-top: 5rem;
+    grid-gap: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5rem;
+    .a_blogs_item {
+      gap: 1rem;
+      img {
+        width: 30vw;
+        height: 20vh;
+      }
+    }
+  }
+}
