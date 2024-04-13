@@ -36,14 +36,6 @@ const Blogs = () => {
               </div>
             );
           })}
-          {data.map((blog, index) => {
-            return (
-              <div className="a_blogs_item">
-                <img src={blog.image} alt="" />
-                <h3>{blog.title}</h3>
-              </div>
-            );
-          })}
         </div>
       )}
     </div>

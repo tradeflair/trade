@@ -1,16 +1,12 @@
 import React, { useState } from "react";
 import "./blogs.scss";
-import b1 from "../../images/blog1.jpeg";
-import b2 from "../../images/blog2.jpeg";
-import b3 from "../../images/blog3.jpg";
 import Slider from "react-slick";
-import { AiFillPlusSquare, AiFillMinusSquare } from "react-icons/ai";
-import { BASE } from "../../App";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { BASE } from "../../App";
+import { AiFillPlusSquare, AiFillMinusSquare } from "react-icons/ai";
 
 const Blogs = ({ data }) => {
-  console.log(data);
   const [hover, setHover] = useState(-1);
   const [click, setClik] = useState(-1);
   const handleClick = (index) => {
@@ -24,15 +20,29 @@ const Blogs = ({ data }) => {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
+    slidesToShow: 3,
+
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
   };
   return (
-    <div className="blogs_container slider-container">
+    <div className="blogs_container">
       <h2>Our Blogs</h2>
-      <div className="blogs_content">
+      <div className="blogs_content slider-container">
         <Slider {...settings}>
-          {/* {data.map((item, index) => {
+          {data.map((item, index) => {
             return (
               <div
                 className={`blog ${hover == index && "top_0"}`}
@@ -66,13 +76,6 @@ const Blogs = ({ data }) => {
                     onClick={() => handleClick(index)}
                   />
                 </div>
-              </div>
-            );
-          })} */}
-          {data.map((item, index) => {
-            return (
-              <div className="blog_2" key={index}>
-                <h1>{item.title}</h1>
               </div>
             );
           })}
