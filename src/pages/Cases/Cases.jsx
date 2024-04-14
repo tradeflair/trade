@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { BASE } from "../../App";
 import axios from "axios";
-import "./blogs.scss";
+import "./cases.scss";
 import Loading from "../../components/loading/Loading";
 import { AiFillPlusSquare, AiFillMinusSquare } from "react-icons/ai";
 import { Link } from "react-router-dom";
-const Blogs = () => {
+const Cases = () => {
   const url = BASE;
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -14,7 +14,7 @@ const Blogs = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const res = await axios.get(url + "/blogs/");
+        const res = await axios.get(url + "/cases/");
         setData(res.data);
         setLoading(false);
       } catch (error) {
@@ -34,56 +34,55 @@ const Blogs = () => {
     }
   };
   return (
-    <div className="a_blogs_container">
-      <h2>BLOGS</h2>
+    <div className="a_cases_container">
+      <h2>Case Stdies</h2>
       {loading ? (
         <Loading title={"Loading"} />
       ) : (
-        <div className="a_blogs_content">
-          {data.map((blog, index) => {
-            console.log(blog);
+        <div className="a_cases_content">
+          {data.map((item, index) => {
             return (
               <div
-                className="a_blogs_item"
+                className="a_cases_item"
                 key={index}
                 onMouseEnter={() => setHover(index)}
                 onMouseLeave={() => setHover(-1)}
               >
-                <img src={blog.image} alt="" />
-                <h3>{blog.title}</h3>
+                <img src={item.image} alt="" />
+                <h3>{item.title}</h3>
 
                 <div
-                  className={`a_blog_hover ${
-                    hover === index && "blog_bottom_zero"
+                  className={`a_case_hover ${
+                    hover === index && "case_bottom_zero"
                   }`}
                 >
-                  <h3>{blog.title}</h3>
-                  <p>{blog.details}</p>
+                  <h3>{item.title}</h3>
+                  <p>{item.details}</p>
                   <button>
-                    <Link to={`../blog/${blog.slug}`}>See All</Link>
+                    <Link to={`../case/${item.slug}`}>See All</Link>
                   </button>
                 </div>
                 <div
-                  className={`a_blog_click ${
-                    click === index && "blog_bottom_zero"
+                  className={`a_case_click ${
+                    click === index && "case_bottom_zero"
                   }`}
                 >
-                  <h3>{blog.title}</h3>
-                  <p>{blog.details}</p>
+                  <h3>{item.title}</h3>
+                  <p>{item.details}</p>
                   <button>
-                    <Link to={`../blog/${blog.slug}`}>See All</Link>
+                    <Link to={`../case/${item.slug}`}>See All</Link>
                   </button>
                 </div>
-                <div className="a_blog_click_container">
+                <div className="a_case_click_container">
                   <AiFillPlusSquare
                     onClick={() => handleClick(index)}
-                    className={`a_blog_icon ${
-                      click == index ? "a_blog_icon_0" : ""
+                    className={`a_case_icon ${
+                      click == index ? "a_case_icon_0" : ""
                     }`}
                   />
                   <AiFillMinusSquare
-                    className={`a_blog_icon ${
-                      click !== index ? "a_blog_icon_0" : ""
+                    className={`a_case_icon ${
+                      click !== index ? "a_case_icon_0" : ""
                     }`}
                     onClick={() => handleClick(index)}
                   />
@@ -97,4 +96,4 @@ const Blogs = () => {
   );
 };
 
-export default Blogs;
+export default Cases;

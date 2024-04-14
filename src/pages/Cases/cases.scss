@@ -1,18 +1,18 @@
 @use "../../App.scss" as *;
-.a_blogs_container {
+.a_cases_container {
   margin-top: 10rem;
   min-height: 80vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  .a_blogs_content {
+  .a_cases_content {
     margin-top: 5rem;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     gap: 2rem;
-    .a_blogs_item {
+    .a_cases_item {
       gap: 1rem;
       width: 30vw;
       min-height: 15rem;
@@ -28,7 +28,7 @@
       @include breack_down(medium) {
         width: 80vw;
       }
-      .a_blog_hover {
+      .a_case_hover {
         position: absolute;
         width: 100%;
         height: 100%;
@@ -63,7 +63,7 @@
           }
         }
       }
-      .a_blog_click {
+      .a_case_click {
         position: absolute;
         width: 100%;
         height: 100%;
@@ -111,23 +111,23 @@
   }
 }
 
-.blog_bottom_zero {
+.case_bottom_zero {
   bottom: 0 !important;
 }
-.a_blog_click_container {
+.a_case_click_container {
   position: absolute;
   top: 0rem;
   right: 0rem;
   @include breack_up(medium) {
     display: none !important;
   }
-  .a_blog_icon {
+  .a_case_icon {
     transition: 0.5s;
     width: 2rem;
     height: 2rem;
     color: $second;
   }
-  .a_blog_icon_0 {
+  .a_case_icon_0 {
     width: 0;
   }
 }

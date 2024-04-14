@@ -412,6 +412,8 @@
   }
 }
 .link_publications {
+  display: flex;
+  flex-direction: column;
   a {
     text-decoration: none;
     margin-top: 0.5rem;

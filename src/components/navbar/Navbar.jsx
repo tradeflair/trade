@@ -163,7 +163,7 @@ const Navbar = () => {
               <div className="link_publications">
                 <h3>Publications</h3>
                 <Link to="/blogs">Blogs</Link>
-                <p>Case Stdies</p>
+                <Link to="/cases">Case Stdies</Link>
                 <p>FAQs</p>
               </div>
               <div className="link_calc">
