@@ -23,6 +23,9 @@
   padding: 0 5rem;
   width: 100%;
   align-items: center;
+  @include breack_down(medium) {
+    display: none !important;
+  }
   .faq_top {
     display: flex;
     justify-content: center;
@@ -87,4 +90,8 @@
 .opacity_0 {
   opacity: 0 !important;
   pointer-events: none;
+}
+
+.faq_mobile {
+  margin-top: 2rem;
 }

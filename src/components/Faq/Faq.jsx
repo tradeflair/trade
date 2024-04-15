@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./faq.scss";
+import axios from "axios";
+import { BASE } from "../../App";
 const Faq = () => {
   const arr = [
     {
@@ -120,10 +122,9 @@ const Faq = () => {
       ],
     },
   ];
-  const cats = arr.map((item) => {
-    return item.category;
-  });
 
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
   const [catIndex, setCatIndex] = useState(null);
   const [innerCat, setInnerCat] = useState("asdf");
   const [qIndex, setQindex] = useState("asdf");
@@ -136,6 +137,40 @@ const Faq = () => {
     setInnerCat(index);
     setQindex("asdf");
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await axios.get(BASE + "/faq");
+      const data = res.data;
+      const arrF = [];
+
+      for (let i = 0; i < data.length; i++) {
+        if (
+          !arrF.find(
+            (item) => item.category === data[i].sub_category.category.category
+          )
+        ) {
+          arrF.push({
+            category: data[i].sub_category.category.category,
+            sub: [
+              {
+                inner: data[i].sub_category.sub_category,
+                q2: [{ quset: data[i].question, ans: data[i].answer }],
+              },
+            ],
+          });
+        }
+      }
+
+      setData(arrF);
+      setLoading(false);
+    };
+    fetchData();
+  }, []);
+
+  const cats = data.map((item) => {
+    return item.category;
+  });
   return (
     <div className="faq_container">
       <div className="faq_text">
@@ -162,7 +197,7 @@ const Faq = () => {
           ))}
         </div>
         <div className="faq_bottom">
-          {arr.map((item, index) => {
+          {data.map((item, index) => {
             return (
               <div
                 className={`faq_item ${catIndex !== index && "opacity_0"}`}
@@ -173,7 +208,7 @@ const Faq = () => {
                   <div className="faq_inner">
                     {item.sub.map((sub, i) => {
                       return (
-                        <div>
+                        <div key={i}>
                           <h3
                             className="sub_category"
                             onClick={() => handleInnerCat(i)}
@@ -200,6 +235,22 @@ const Faq = () => {
             );
           })}
         </div>
+      </div>
+      <div className="faq_mobile">
+        {data.map((item, index) => {
+          return (
+            <div className="faq_item_mobile">
+              <h2
+                className={`faq_top_item_mobile ${
+                  index == catIndex && "faq_top_item_active_mobile"
+                }`}
+                onClick={() => handleCategory(index)}
+              >
+                {item.category}
+              </h2>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

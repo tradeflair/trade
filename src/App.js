@@ -22,7 +22,7 @@ function App() {
         <Route element={<Blogs />} path="/blogs" />
         <Route element={<Blog />} path="/blog/:blogId" />
         <Route element={<Cases />} path="/cases" />
-        {/* <Route element={<SingleCase />} path="/case/:caseId" /> */}
+        <Route element={<SingleCase />} path="/case/:caseId" />
       </Routes>
       <Footer />
     </BrowserRouter>
