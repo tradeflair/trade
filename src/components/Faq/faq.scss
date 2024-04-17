@@ -4,8 +4,11 @@
   flex-direction: column;
   align-items: center;
   background-color: #fff;
-  padding: 3rem 0;
-  min-height: 50vh;
+  padding: 5vw 0;
+  @include breack_up(medium) {
+    min-height: 50vh;
+    min-height: 50vh;
+  }
   .faq_text {
     display: flex;
     flex-direction: column;
@@ -13,6 +16,9 @@
     gap: 3rem;
     width: 60%;
     text-align: center;
+    @include breack_down(large) {
+      width: 90%;
+    }
   }
 }
 .faq_map {
@@ -23,7 +29,7 @@
   padding: 0 5rem;
   width: 100%;
   align-items: center;
-  @include breack_down(medium) {
+  @include breack_down(large) {
     display: none !important;
   }
   .faq_top {
@@ -33,7 +39,7 @@
     outline: 1px solid $light;
     .faq_top_item {
       padding: 1rem;
-      width: 20vw;
+      width: 25vw;
       cursor: pointer;
       transition: 0.6s;
       color: $second;
@@ -50,12 +56,14 @@
     justify-content: space-between;
     justify-content: center;
     .faq_item {
-      width: 20vw;
+      width: 25vw;
       padding: 1rem;
       outline: 1px solid $light;
-      // margin-top: 5px;
-      // border-radius: 10px;
       transition: 0.5s;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: fit-content;
     }
     .sub_category {
       margin: 5px 0;
@@ -70,7 +78,7 @@
 }
 .faq_q_container {
   h4 {
-    margin: 5px 0;
+    margin: 5px 0 5px 5px;
     cursor: pointer;
     color: $second;
     transition: 0.6s;
@@ -80,6 +88,7 @@
   }
   p {
     color: $gr;
+    margin: 5px 0 5px 5px;
   }
 }
 .faq_top_item_active {
@@ -94,4 +103,15 @@
 
 .faq_mobile {
   margin-top: 2rem;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: fit-content;
+  @include breack_up(medium) {
+    display: none !important;
+  }
+  .faq_top_item_mobile {
+    margin: 1rem 0;
+  }
 }
