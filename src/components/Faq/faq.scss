@@ -112,6 +112,19 @@
     display: none !important;
   }
   .faq_top_item_mobile {
-    margin: 1rem 0;
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    outline: 1px solid $light;
+    width: fit-content;
   }
+  .faq_top_item_active_mobile {
+    background-color: $light;
+  }
+  .faq_mobile_quest {
+    margin-left: 5px;
+  }
+}
+
+.faq_aqtive_color {
+  color: $light !important;
 }

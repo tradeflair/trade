@@ -4,148 +4,44 @@ import axios from "axios";
 import { BASE } from "../../App";
 import Loading from "../loading/Loading";
 const Faq = () => {
-  const arr = [
-    {
-      category: " Category 1",
-      sub: [
-        {
-          inner: "Sub Category 1",
-          q2: [
-            {
-              quset: "Provident modi",
-              ans: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia,",
-            },
-            {
-              quset: "Provident modi",
-              ans: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia,",
-            },
-            {
-              quset: "Provident modi",
-              ans: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia,",
-            },
-          ],
-        },
-        {
-          inner: "Sub Category 2",
-          q2: [
-            {
-              quset: "Provident modi",
-              ans: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia,",
-            },
-            {
-              quset: "Provident modi",
-              ans: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia,",
-            },
-            {
-              quset: "Provident modi",
-              ans: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia,",
-            },
-          ],
-        },
-      ],
-    },
-    {
-      category: " Category 2",
-      sub: [
-        {
-          inner: "Sub Category 1",
-          q2: [
-            {
-              quset: "Provident modi",
-              ans: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia,",
-            },
-            {
-              quset: "Provident modi",
-              ans: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia,",
-            },
-            {
-              quset: "Provident modi",
-              ans: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia,",
-            },
-          ],
-        },
-        {
-          inner: "Sub Category 2",
-          q2: [
-            {
-              quset: "Provident modi",
-              ans: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia,",
-            },
-            {
-              quset: "Provident modi",
-              ans: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia,",
-            },
-            {
-              quset: "Provident modi",
-              ans: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia,",
-            },
-          ],
-        },
-      ],
-    },
-    {
-      category: " Category 3",
-      sub: [
-        {
-          inner: "Sub Category 1",
-          q2: [
-            {
-              quset: "Provident modi",
-              ans: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia,",
-            },
-            {
-              quset: "Provident modi",
-              ans: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia,",
-            },
-            {
-              quset: "Provident modi",
-              ans: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia,",
-            },
-          ],
-        },
-        {
-          inner: "Sub Category 2",
-          q2: [
-            {
-              quset: "Provident modi",
-              ans: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia,",
-            },
-            {
-              quset: "Provident modi",
-              ans: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia,",
-            },
-            {
-              quset: "Provident modi",
-              ans: " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia,",
-            },
-          ],
-        },
-      ],
-    },
-  ];
-
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [catIndex, setCatIndex] = useState(null);
   const [innerCat, setInnerCat] = useState(-1);
   const [qIndex, setQindex] = useState(-1);
   const handleCategory = (index) => {
-    setCatIndex(index);
-    setInnerCat(-1);
-    setQindex(-1);
+    if (index === catIndex) {
+      setCatIndex(-1);
+      setInnerCat(-1);
+      setQindex(-1);
+    } else {
+      setCatIndex(index);
+      setInnerCat(-1);
+      setQindex(-1);
+    }
   };
   const handleInnerCat = (index) => {
-    setInnerCat(index);
-    setQindex(-1);
+    if (index === innerCat) {
+      setInnerCat(-1);
+      setQindex(-1);
+    } else {
+      setInnerCat(index);
+      setQindex(-1);
+    }
   };
-
+  const handleQ = (index) => {
+    if (index === qIndex) {
+      setQindex(-1);
+    } else {
+      setQindex(index);
+    }
+  };
   useEffect(() => {
     const fetchData = async () => {
       try {
         const res = await axios.get(BASE + "/faq");
         const data = res.data;
         const arrF = [];
-
         for (let i = 0; i < data.length; i++) {
           const category = arrF.find(
             (item) => item.category === data[i].sub_category.category.category
@@ -219,10 +115,10 @@ const Faq = () => {
                 {data.map((item, index) => {
                   return (
                     <div
+                      key={index}
                       className={`faq_item ${
                         catIndex !== index && "opacity_0"
                       }`}
-                      key={index}
                     >
                       <div className="faq_category wraper_1">
                         <h2 className="expand_1 faq_top_inner">
@@ -233,7 +129,9 @@ const Faq = () => {
                             return (
                               <div key={i}>
                                 <h3
-                                  className="sub_category"
+                                  className={`sub_category ${
+                                    innerCat === i && "faq_aqtive_color"
+                                  }`}
                                   onClick={() => handleInnerCat(i)}
                                 >
                                   {sub.inner}
@@ -241,8 +139,16 @@ const Faq = () => {
                                 {innerCat === i &&
                                   sub.q2.map((q, qIn) => {
                                     return (
-                                      <div className="faq_q_container">
-                                        <h4 onClick={() => setQindex(qIn)}>
+                                      <div
+                                        className="faq_q_container"
+                                        key={qIn}
+                                      >
+                                        <h4
+                                          className={`${
+                                            qIndex == qIn && "faq_aqtive_color"
+                                          }`}
+                                          onClick={() => handleQ(qIn)}
+                                        >
                                           {q.quset}
                                         </h4>
                                         {qIn == qIndex && <p>{q.ans}</p>}
@@ -263,7 +169,7 @@ const Faq = () => {
           <div className="faq_mobile">
             {data.map((item, index) => {
               return (
-                <div className="faq_item_mobile">
+                <div className="faq_item_mobile" key={index}>
                   <h3
                     className={`faq_top_item_mobile ${
                       index == catIndex && "faq_top_item_active_mobile"
@@ -278,7 +184,12 @@ const Faq = () => {
                         {item.sub.map((subItem, i) => {
                           return (
                             <div key={i}>
-                              <h4 onClick={() => handleInnerCat(i)}>
+                              <h4
+                                className={`sub_category ${
+                                  innerCat === i && "faq_aqtive_color"
+                                }`}
+                                onClick={() => handleInnerCat(i)}
+                              >
                                 {subItem.inner}
                               </h4>
                               {innerCat === i ? (
@@ -287,7 +198,12 @@ const Faq = () => {
                                     {subItem.q2.map((q, qI) => {
                                       return (
                                         <div key={qI}>
-                                          <h4 onClick={() => setQindex(qI)}>
+                                          <h4
+                                            className={`${
+                                              qIndex == qI && "faq_aqtive_color"
+                                            }`}
+                                            onClick={() => handleQ(qI)}
+                                          >
                                             {q.quset}
                                           </h4>
                                           {qI == qIndex && <p>{q.ans}</p>}
