@@ -4,7 +4,7 @@
     display: flex;
     justify-content: center;
     gap: 10vw;
-    padding: 6rem;
+    padding: 3rem;
 
     color: $second;
     background-image: url("../../images/cb.webp");
@@ -16,6 +16,25 @@
       padding: 2rem;
     }
     .contact_left {
+      .contact_title {
+        h3 {
+          font-size: 3rem;
+          margin-bottom: 1rem;
+          color: $main;
+          @include breack_down(large) {
+            text-align: center;
+            font-size: 2rem;
+          }
+        }
+        p {
+          color: $main;
+          font-size: 1.5rem;
+          @include breack_down(large) {
+            text-align: center;
+            font-size: 1rem;
+          }
+        }
+      }
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -50,31 +69,28 @@
       }
     }
     .contact_right {
+      background-color: #fff;
+      padding: 1rem;
+      border-radius: 10px;
       display: flex;
       flex-direction: column;
       gap: 2rem;
       justify-content: space-between;
-
-      .contact_title {
-        h3 {
-          font-size: 2rem;
-          margin-bottom: 1rem;
-          color: $main;
-          @include breack_down(large) {
-            text-align: center;
-          }
+      .contact_logo {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        img {
+          width: 5rem;
         }
-        p {
+        h3 {
           color: $main;
-          @include breack_down(large) {
-            text-align: center;
-          }
         }
       }
       .contact_form {
         display: flex;
         flex-direction: column;
-        gap: 3rem;
+        gap: 1rem;
         @include breack_down(large) {
           align-items: center;
         }
@@ -83,7 +99,7 @@
           border-radius: 4px;
           border: none;
           width: 25rem;
-          // background-color: red;
+          background-color: $bacground;
           @include breack_down(large) {
             width: 80vw;
           }
@@ -97,8 +113,9 @@
           border: none;
           //   outline: 1px solid $second;
           width: 25rem !important;
-          min-height: 15rem !important;
+          min-height: 5rem !important;
           max-height: 20rem !important;
+          background-color: $bacground;
           @include breack_down(large) {
             width: 80vw !important;
           }
@@ -106,26 +123,48 @@
             outline: 1px solid $main;
           }
         }
-        button {
-          width: fit-content;
-          padding: 1rem 2rem;
-          border: none;
-          outline: 1px solid $main;
-          background-color: $main;
-          color: #fff;
-          border-radius: 5px;
-          font-weight: 500;
-          transition: 0.5s;
-          cursor: pointer;
-          @include breack_down(large) {
-            padding: 0.5rem 1rem;
+        .form_btn_container {
+          display: flex;
+          align-items: center;
+          gap: 2rem;
+          height: 5rem;
+          img {
+            width: 3rem;
+            height: 3rem;
           }
-          &:hover {
-            background-color: transparent;
-            color: $main;
+          button {
+            width: fit-content;
+            padding: 1rem 2rem;
+            border: none;
+            outline: 1px solid $main;
+            background-color: $main;
+            color: #fff;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: 0.5s;
+            cursor: pointer;
+            @include breack_down(large) {
+              padding: 0.5rem 1rem;
+            }
+            &:hover {
+              background-color: transparent;
+              color: $main;
+            }
           }
         }
       }
     }
+  }
+}
+.contact_div {
+  position: relative;
+  p {
+    position: absolute;
+    color: rgb(165, 1, 1);
+  }
+}
+.outline_red {
+  input {
+    outline: 1px solid rgb(165, 1, 1) !important;
   }
 }

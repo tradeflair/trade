@@ -10,19 +10,52 @@ import Blogs from "./pages/Blogs/Blogs";
 import Cases from "./pages/Cases/Cases";
 import Blog from "./pages/Blog/Blog";
 import SingleCase from "./pages/SingleCase/SingleCase";
+import Product from "./pages/product/Product";
+import { useRef } from "react";
+import Terms from "./pages/terms/Terms";
+import Refunds from "./pages/terms/Refunds";
+import Disc from "./pages/terms/Disc";
+import Cookies from "./pages/terms/Cookies";
+import Privacy from "./pages/terms/Privacy";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import ContactPage from "./pages/contact/ContactPage";
 
 export const BASE = "https://tradeflaircorp.in";
 function App() {
+  const myElementRef = useRef(null);
+
+  const scrollToElement = () => {
+    if (myElementRef.current) {
+      myElementRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <BrowserRouter>
-      <Navbar />
+      <Navbar scrollToElement={scrollToElement} />
       <Routes>
-        <Route element={<Home />} path="/" />
+        <Route
+          element={
+            <Home
+              scrollToElement={scrollToElement}
+              myElementRef={myElementRef}
+            />
+          }
+          path="/"
+        />
         <Route element={<Calc />} path="/calculator" />
         <Route element={<Blogs />} path="/blogs" />
         <Route element={<Blog />} path="/blog/:blogId" />
         <Route element={<Cases />} path="/cases" />
         <Route element={<SingleCase />} path="/case/:caseId" />
+        <Route element={<Product />} path="/product" />
+        <Route element={<Terms />} path="/terms" />
+        <Route element={<Disc />} path="/disclaimer" />
+        <Route element={<Cookies />} path="/cookies" />
+        <Route element={<Privacy />} path="/privacy" />
+        <Route element={<Refunds />} path="/refunds" />
+        <Route element={<ContactPage />} path="/contact" />
       </Routes>
       <Footer />
     </BrowserRouter>
